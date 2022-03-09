@@ -1,0 +1,40 @@
+Bagi teman-teman yang masih asing dengan struktur data Stack, saya akan menjabarkan sedikit karakteristiknya:
+1. Memiliki konsep LIFO (Last In First Out)
+2. Memiliki metode operasional PUSH (Menambah Elemen) dan POP (Menghapus Elemen)
+3. Penambahan elemen baru pada stack yang sudah penuh disebut overflow
+4. Penghapusan elemen pada stack yang masih kosong disebut underflow
+
+======================================================================================
+
+Feature: Fungsi menambahkan elemen yang ada di dalam stack
+Deskripsi: Saya sebagai seorang user, saya ingin menambahkan elemen baru ke dalam stack.
+
+Scenario Outline: Menambahkan elemen baru di saat stack dalam kondisi overflow.
+Given saya memiliki stack yang di dalamnya sudah terisi penuh.
+When saya menambahkan elemen baru ke dalam stack tersebut.
+Then menghasilkan error dengan pesan stack overflow.
+
+Scenario Outline: Menambahkan elemen baru di saat stack dalam kondisi kosong.
+Given saya memiliki stack yang masih kosong.
+When saya menambahkan elemen baru ke dalam stack tersebut.
+Then
+- memastikan elemen yang baru dimasukkan telah berhasil dimasukkan
+- memastikan stack tidak lagi kosong.
+- memastikan size stack sesuai dengan jumlah elemen yang dimasukkan
+
+==============================================================================================
+
+Feature: Fungsi menghapus elemen yang ada di dalam stack
+Deskripsi: Saya sebagai seorang user, saya ingin menghapus elemen yang ada di dalam stack.
+
+Scenario Outline: Menghapus elemen baru di saat stack dalam kondisi underflow.
+Given saya memiliki stack yang masih kosong.
+When saya menghapus elemen yang ada di dalam stack tersebut.
+Then menghasilkan error dengan pesan stack underflow.
+
+Scenario Outline: Menghapus elemen terakhir yang ada di dalam stack.
+Given saya memiliki stack yang sudah terisi full.
+When saya menghapus elemen terakhir yang ada di dalam stack tersebut.
+Then
+- memastikan elemen yang terhapus adalah elemen yang terakhir masuk ke dalam stack
+- memastikan stack menjadi kosong.

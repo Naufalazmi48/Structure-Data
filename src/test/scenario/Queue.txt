@@ -1,0 +1,48 @@
+Karakteristik struktur data Queue:
+1. Memiliki konsep FIFO (First In First Out)
+2. Memiliki metode operasional PUSH (Menambah Elemen) dan POP (Menghapus Elemen)
+3. Penambahan elemen baru pada queue yang sudah penuh disebut overflow
+4. Penghapusan elemen pada queue yang masih kosong disebut underflow
+5. Memiliki nilai front dan rear
+============================================================================================
+
+Feature: Fungsi menambahkan elemen yang ada di dalam queue
+Deskripsi: Saya sebagai seorang user, saya ingin menambahkan elemen baru ke dalam queue.
+
+Scenario Outline: Menambahkan elemen baru di saat queue dalam kondisi overflow.
+Given saya memiliki queue yang di dalamnya sudah terisi penuh.
+When saya menambahkan elemen baru ke dalam queue tersebut.
+Then menghasilkan error dengan pesan queue overflow.
+
+Scenario Outline: Menambahkan elemen baru di saat queue dalam kondisi kosong.
+Given saya memiliki queue yang masih kosong.
+When saya menambahkan elemen baru ke dalam queue tersebut.
+Then
+- memastikan elemen yang baru dimasukkan telah berhasil dimasukkan
+- memastikan queue tidak lagi kosong.
+- memastikan size queue sesuai dengan jumlah elemen yang dimasukkan
+
+Scenario Outline: Menambahkan elemen baru di saat queue dalam kondisi sudah menghapus beberapa elementnya
+Given saya memiliki queue yang memiliki element berjumlah 4.
+When
+- Menghapus dua element yang ada di queue
+- Menambahkan dua element ke dalam queue
+Then
+- Memastikan posisi element yang masuk sesuai dengan yang diharapkan
+
+==============================================================================================
+
+Feature: Fungsi menghapus elemen yang ada di dalam queue
+Deskripsi: Saya sebagai seorang user, saya ingin menghapus elemen yang ada di dalam queue.
+
+Scenario Outline: Menghapus elemen baru di saat queue dalam kondisi underflow.
+Given saya memiliki queue yang masih kosong.
+When saya menghapus elemen yang ada di dalam queue tersebut.
+Then menghasilkan error dengan pesan queue underflow.
+
+Scenario Outline: Menghapus elemen pertama yang ada di dalam stack.
+Given saya memiliki queue yang sudah terisi full.
+When saya menghapus elemen pertama yang ada di dalam queue tersebut.
+Then
+- memastikan elemen yang terhapus adalah elemen yang pertama masuk ke dalam queue
+- memastikan queue menjadi kosong.

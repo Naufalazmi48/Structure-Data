@@ -11,8 +11,16 @@ class StackTest {
     @BeforeEach
     void setUp() {
         underflowStack = new Stack();
-        Object[] initialValue = {"Naufal", "Okta", "Rabil", "Ziad", "Wawan"};
-        overflowStack = new Stack(initialValue);
+        overflowStack = new Stack();
+        try {
+            overflowStack.push("Naufal");
+            overflowStack.push("Okta");
+            overflowStack.push("Rabil");
+            overflowStack.push("Ziad");
+            overflowStack.push("Wawan");
+        } catch (Exception ignored) {
+
+        }
     }
 
     @Test
@@ -29,12 +37,14 @@ class StackTest {
 //            When
             underflowStack.push("Naufal");
             underflowStack.push("Reza");
+            Object[] elementsAfterPush = {"Naufal", "Reza", null, null, null};
 
 //            Then
             assertTrue(underflowStack.contains("Naufal"));
             assertTrue(underflowStack.contains("Reza"));
 
             assertFalse(underflowStack.isEmpty());
+            assertArrayEquals(elementsAfterPush, underflowStack.getElements());
 
             assertEquals(2, underflowStack.size());
         } catch (Exception e) {
@@ -54,14 +64,14 @@ class StackTest {
     void testPopStackValid(){
         try {
 //            Given
-            Object lastElement = overflowStack.getElement(overflowStack.size() - 1);
+            Object[] afterPop = {"Naufal", "Okta", "Rabil", "Ziad", null};
             int size = overflowStack.size();
 
 //            When
             overflowStack.pop();
 
 //            Then
-            assertFalse(overflowStack.contains(lastElement));
+            assertArrayEquals(afterPop, overflowStack.getElements());
             assertEquals(size - 1, overflowStack.size());
         } catch(Exception e){
             fail();

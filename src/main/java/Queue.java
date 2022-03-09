@@ -1,7 +1,7 @@
-public class Stack {
-
+public class Queue {
     private final Object[] elements = new Object[5];
-    private int index = 0;
+    private int front = 0;
+    private int rear = 0;
 
     public Object[] getElements() {
         return elements;
@@ -9,10 +9,13 @@ public class Stack {
 
     public void push(Object newElement) throws Exception {
         if (isOverflow()) {
-            throw new Exception("Stack Overflow");
+            throw new Exception("Queue Overflow");
         } else {
-            elements[index] = newElement;
-            index++;
+            if (rear == elements.length) {
+                rear = 0;
+            }
+            elements[rear] = newElement;
+            rear++;
         }
     }
 
@@ -43,10 +46,13 @@ public class Stack {
 
     public void pop() throws Exception {
         if (isEmpty()) {
-            throw new Exception("Stack Underflow");
+            throw new Exception("Queue Underflow");
         } else {
-            elements[index - 1] = null;
-            index--;
+            if (front == elements.length) {
+                front = 0;
+            }
+            elements[front] = null;
+            front++;
         }
     }
 }
